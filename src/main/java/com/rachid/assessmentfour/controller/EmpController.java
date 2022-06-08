@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -21,7 +23,14 @@ public class EmpController {
 
     @PostMapping("/save")
     public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee){
-        return new ResponseEntity(empService.saveEmployee(employee), HttpStatus.OK);
+
+        Map<String, String> resBody = new HashMap<>();
+        resBody.put("Status", "VALID");
+        resBody.put("errors", "[]");
+
+        return new ResponseEntity(resBody, HttpStatus.CREATED);
+
+
     }
 
 }
